@@ -16,9 +16,9 @@ interface PresentableInterface {
 	public function present();
 
 	/**
-	 * Set Presenter Resource
+	 * Get the full qualified class name for the presenter class
 	 *
-	 * @return mixed
+	 * @return string
 	 */
-	public function setPresenterResource();
+	public function getPresenterClass();
 } 

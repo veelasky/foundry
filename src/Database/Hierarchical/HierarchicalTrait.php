@@ -1,6 +1,6 @@
-<?php namespace Veelasky\Foundry\Database\Parentable;
+<?php namespace Veelasky\Foundry\Database\Hierarchical;
 /**
- * Parentable trait
+ * Hierarchical trait
  * 
  * @author      veelasky <veelasky@gmail.com>
  * @package     veelasky/foundry
@@ -9,17 +9,17 @@
 use DB;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-trait ParentableTrait {
+trait HierarchicalTrait {
 
 	/**
 	 * define has many relations to current table
 	 *
-	 * @throws \Veelasky\Foundry\Database\Parentable\Exceptions\InvalidAttributeException
+	 * @throws \Veelasky\Foundry\Database\Hierarchical\Exceptions\InvalidAttributeException
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function children()
 	{
-		if (! in_array('parent', $this->attributes))
+		if (! in_array('parent', $this->attributes) OR ! in_array('order', $this->attributes))
 			throw new Exceptions\InvalidAttributeException($this);
 
 		$hasMany = new HasMany(
@@ -29,6 +29,6 @@ trait ParentableTrait {
 			$this->getKeyName()
 		);
 
-		return $hasMany->orderBy(DB::raw("COALESCE((SELECT NULLIF(".$this->getTable() . "." . "parent".",0)), ".$this->getTable() . ".". $this->getKeyName() .")"));
+		return $hasMany->orderBy(DB::raw("COALESCE((SELECT NULLIF(".$this->getTable() . ".parent".",0)), ".$this->getTable() . ".order)"));
 	}
 } 

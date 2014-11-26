@@ -1,12 +1,12 @@
-<?php namespace Veelasky\Foundry\Database\Parentable;
+<?php namespace Veelasky\Foundry\Database\Hierarchical;
 /**
- * Parentable interface
+ * Hierarchical interface
  * 
  * @author      veelasky <veelasky@gmail.com>
  * @package     veelasky/foundry
  */
 
-interface ParentableInterface {
+interface HierarchicalInterface {
 
 	/**
 	 * define has many relations to current table

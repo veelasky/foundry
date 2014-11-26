@@ -6,7 +6,7 @@
  * @package     veelasky/foundry
  */
 
-use DB;
+use Illuminate\Database\Query\Expression;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 trait HierarchicalTrait {
@@ -29,6 +29,6 @@ trait HierarchicalTrait {
 			$this->getKeyName()
 		);
 
-		return $hasMany->orderBy(DB::raw("COALESCE((SELECT NULLIF(".$this->getTable() . ".parent".",0)), ".$this->getTable() . ".order)"));
+		return $hasMany->orderBy(new Expression("COALESCE((SELECT NULLIF(".$this->getTable() . ".parent".",0)), ".$this->getTable() . ".order)"));
 	}
 } 

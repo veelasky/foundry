@@ -1,0 +1,6 @@
+suites:
+  foundry_suite:
+    namespace: Veelasky\Foundry
+    src_path: src
+    spec_path: tests
+    spec_prefix: spec

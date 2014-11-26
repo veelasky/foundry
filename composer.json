@@ -12,9 +12,12 @@
         "php": ">=5.4.0",
         "laravel/framework": "~5.0"
     },
+    "require-dev": {
+        "phpspec/phpspec": "~2.0"
+    },
     "autoload": {
         "psr-4": {
-            "Veelasky\\Foundry": "src/"
+            "Veelasky\\Foundry\\": "src/"
         }
     },
     "minimum-stability": "dev",

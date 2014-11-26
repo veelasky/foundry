@@ -34,7 +34,12 @@ trait MetadataTrait {
 		$eloquent = new MetadataModel();
 		$eloquent->setTable($this->__metadataAttributes['tableName']);
 
-		return new HasMany($eloquent->newQuery(), $this, $eloquent->getTable() . ".". $this->__metadataAttributes['foreignKey'], $this->__metadataAttributes['localKey']);
+		return new HasMany(
+			$eloquent->newQuery(),
+			$this,
+			$eloquent->getTable() . ".". $this->__metadataAttributes['foreignKey'],
+			$this->__metadataAttributes['localKey']
+		);
 	}
 
 	/**

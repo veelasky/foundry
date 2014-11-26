@@ -1,6 +1,4 @@
+formatter.name: pretty
 suites:
-  foundry_suite:
-    namespace: Veelasky\Foundry
-    src_path: src
-    spec_path: tests
-    spec_prefix: spec
+  presenter_suite:
+    src_path: src/Presenter

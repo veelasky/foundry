@@ -1,0 +1,22 @@
+{
+    "name": "veelasky/foundry",
+    "description": "Collections of useful tools and application's design structure on laravel framework",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Rifki Alhuraibi",
+            "email": "veelasky@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.4.0",
+        "laravel/framework": "~5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Veelasky\\Foundry": "src/"
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

@@ -22,11 +22,13 @@ trait ParentableTrait {
 		if (! in_array('parent', $this->attributes))
 			throw new Exceptions\InvalidAttributeException($this);
 
-		return new HasMany(
-			$this->newQuery()->orderBy(DB::raw("COALESCE((SELECT NULLIF(".$this->getTable() . "." . "parent".",0)), ".$this->getTable() . ".". $this->getKeyName() .")")),
+		$hasMany = new HasMany(
+			$this->newQuery(),
 			$this,
 			$this->getTable() . "." . "parent",
 			$this->getKeyName()
 		);
+
+		return $hasMany->orderBy(DB::raw("COALESCE((SELECT NULLIF(".$this->getTable() . "." . "parent".",0)), ".$this->getTable() . ".". $this->getKeyName() .")"));
 	}
 } 

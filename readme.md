@@ -1,7 +1,7 @@
 ### Foundry
 ---
 
-Collections of useful tools and application's design structure on laravel framework
+Collections of useful tools and application's design pattern on laravel framework
 
 ### Features
 ---

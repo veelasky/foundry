@@ -21,4 +21,13 @@ interface PresentableInterface {
 	 * @return string
 	 */
 	public function getPresenterClass();
+
+	/**
+	 * Presentable interface should act as a surrogates to the presenter class
+	 *
+	 * @param $method
+	 * @param $parameters
+	 * @return mixed
+	 */
+	public function handlePresenterCall($method, $parameters);
 } 

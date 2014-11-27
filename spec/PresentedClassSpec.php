@@ -16,6 +16,13 @@ class PresentedClassSpec extends ObjectBehavior
 	    $this->beAnInstanceOf('spec\Stub\ModelStub');
     }
 
+	public function it_should_act_as_a_surrogates_for_the_presenter_class()
+	{
+		$this->presentEmail()->shouldReturn('john.doe@example.com');
+
+		$this->presentMutateEmail()->shouldReturn('john.doe@example.net');
+	}
+
 	public function it_should_implement_presentable_interface()
 	{
 		$this->shouldImplement('Veelasky\Foundry\Presenter\Factory\PresentableInterface');

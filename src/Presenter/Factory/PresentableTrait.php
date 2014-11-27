@@ -6,6 +6,9 @@
  * @package     veelasky/foundry
  */
 
+use Illuminate\Support\Str;
+use Veelasky\Foundry\Presenter\BasePresenter;
+
 trait PresentableTrait {
 
 	/**
@@ -32,5 +35,39 @@ trait PresentableTrait {
 			$this->__presenterInstance = new $presenterClass($this);
 
 		return $this->__presenterInstance;
+	}
+
+	/**
+	 * Presentable interface should act as a surrogates to the presenter class
+	 *
+	 * @param $method
+	 * @param $parameters
+	 * @return mixed
+	 */
+	public function handlePresenterCall($method, $parameters)
+	{
+		$actualMethod  = lcfirst(str_replace('present', '', $method));
+
+		// check if it is really presenter instance, if it is, return the cached class version of it
+		// and should presented the presenter class when its not.
+		if ($this->__presenterInstance instanceof BasePresenter)
+			return call_user_func_array([$this->__presenterInstance, $actualMethod], $parameters);
+
+		return $this->present()->{$actualMethod}();
+	}
+
+	/**
+	 * Handle dynamic method calls into the method.
+	 *
+	 * @param  string  $method
+	 * @param  array   $parameters
+	 * @return mixed
+	 */
+	public function __call($method, $parameters)
+	{
+		if (Str::startsWith($method, 'present') AND ($this instanceof PresentableInterface))
+			return $this->handlePresenterCall($method, $parameters);
+
+		return parent::__call($method, $parameters);
 	}
 } 

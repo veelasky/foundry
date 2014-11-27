@@ -50,11 +50,6 @@ abstract class BasePresenter implements ArrayAccess {
 		}
 	}
 
-	protected function getAttribute($key)
-	{
-		return $this->attributes[$key];
-	}
-
 	/**
 	 * Whether a offset exists
 	 *

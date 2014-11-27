@@ -13,20 +13,20 @@ use spec\Stub\PresenterStub;
 
 class PresenterClassSpec extends ObjectBehavior {
 
-	public function let(ModelStub $modelStub)
+	public function let()
 	{
-		$this->beAnInstanceOf(new PresenterStub($modelStub));
+		$this->beAnInstanceOf('spec\Stub\ModelStub');
 	}
 
 	public function it_should_resolve_parents_property_from_parent_class()
 	{
-		$this->__get('username')->shouldReturn('John Doe');
+		$this->present()->offsetGet('username')->shouldReturn('John Doe');
 
-		$$this->__get('email')->shouldReturn('john.doe@example.com');
+		$this->present()->offsetGet('email')->shouldReturn('john.doe@example.com');
 	}
 
 	public function it_should_handle_missing_method_to_its_parents_class()
 	{
-		$this->getTable()->shouldReturn('table_name');
+		$this->present()->getTable()->shouldReturn('table_name');
 	}
 } 

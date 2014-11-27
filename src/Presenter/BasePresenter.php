@@ -37,11 +37,6 @@ abstract class BasePresenter implements ArrayAccess {
 		$this->setPresenterData();
 	}
 
-	protected function setResourceInstance(PresentableInterface $resource)
-	{
-		$this->resource = $resource;
-	}
-
 	/**
 	 * Set presenter data
 	 *

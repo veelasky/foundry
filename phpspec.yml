@@ -1,0 +1,4 @@
+formatter.name: pretty
+suites:
+  foundry_suite:
+    src_path: src

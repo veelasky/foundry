@@ -14,7 +14,12 @@ class PresentedClassSpec extends ObjectBehavior
 	    $this->beAnInstanceOf('spec\ModelStub');
     }
 
-	function it_should_present_the_presenter_class()
+	public function it_should_implement_presentable_interface()
+	{
+		$this->shouldImplement('Veelasky\Foundry\Presenter\Factory\PresentableInterface');
+	}
+
+	public function it_should_present_the_presenter_class()
 	{
 		$this->present()->shouldReturnAnInstanceOf('spec\PresenterStub');
 	}
@@ -22,12 +27,21 @@ class PresentedClassSpec extends ObjectBehavior
 	public function it_should_resolve_parents_property_from_parent_class()
 	{
 		$this->present()->getAttribute('username')->shouldReturn('John Doe');
+
+		$this->present()->getAttribute('email')->shouldReturn('john.doe@example.com');
+	}
+
+	public function it_should_handle_missing_method_to_its_parents_class()
+	{
+		$this->present()->getTable()->shouldReturn('table_name');
 	}
 }
 
 class ModelStub extends Model implements PresentableInterface {
 
 	use PresentableTrait;
+
+	protected $table = "table_name";
 
 	protected $guarded = false;
 

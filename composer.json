@@ -17,7 +17,8 @@
     },
     "autoload": {
         "psr-4": {
-            "Veelasky\\Foundry\\": "src/"
+            "Veelasky\\Foundry\\": "src/",
+            "spec\\": "spec/"
         }
     },
     "minimum-stability": "dev",

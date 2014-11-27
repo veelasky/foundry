@@ -1,4 +1,4 @@
 formatter.name: pretty
 suites:
-  presenter_suite:
-    src_path: src/Presenter
+  foundry_suite:
+    src_path: src

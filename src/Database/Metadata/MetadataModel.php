@@ -8,4 +8,13 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class MetadataModel extends Model {}
+class MetadataModel extends Model {
+
+	/**
+	 * Indicates if the model should be timestamped.
+	 *
+	 * @var bool
+	 */
+	public $timestamps = false;
+
+}

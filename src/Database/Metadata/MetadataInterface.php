@@ -16,6 +16,34 @@ interface MetadataInterface {
 	public function metadata();
 
 	/**
+	 * Get metadata table name
+	 *
+	 * @return string
+	 */
+	public function getMetadataTable();
+
+	/**
+	 * Get metadata key column name
+	 *
+	 * @return string
+	 */
+	public function getMetadataKeyColumn();
+
+	/**
+	 * Get metadata foreign key
+	 *
+	 * @return string
+	 */
+	public function getMetadataForeignKey();
+
+	/**
+	 * Get metadata value column name
+	 *
+	 * @return string
+	 */
+	public function getMetadataValueColumn();
+
+	/**
 	 * should return an array of tableName, keyColumn, valueColumn, foreignKey, localKey
 	 * Example:
 	 * {
@@ -25,4 +53,5 @@ interface MetadataInterface {
 	 * @return array
 	 */
 	public function setMetadataTableAttributes();
+
 } 

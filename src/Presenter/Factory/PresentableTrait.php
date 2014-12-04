@@ -38,6 +38,21 @@ trait PresentableTrait {
 	}
 
 	/**
+	 * Get guessed presenter class name
+	 *
+	 * @return string
+	 */
+	public function getPresenterClass()
+	{
+		$reflection = new ReflectionClass(__CLASS__);
+		$shortName = $reflection->getShortName();
+
+		$guessedName = str_replace('Model', '', $shortName) . "Presenter";
+
+		return $reflection->getNamespaceName() . "\\" . $guessedName;
+	}
+
+	/**
 	 * Presentable interface should act as a surrogates to the presenter class
 	 *
 	 * @param $method
@@ -55,6 +70,8 @@ trait PresentableTrait {
 
 		return $this->present()->{$actualMethod}();
 	}
+
+
 
 	/**
 	 * Handle dynamic method calls into the method.

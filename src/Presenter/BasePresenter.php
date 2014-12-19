@@ -8,6 +8,7 @@
 
 use ArrayAccess;
 use Illuminate\Database\Eloquent\Model;
+use Veelasky\Foundry\Database\Metadata\MetadataInterface;
 use Veelasky\Foundry\Presenter\Factory\PresentableInterface;
 
 abstract class BasePresenter implements ArrayAccess {
@@ -47,6 +48,16 @@ abstract class BasePresenter implements ArrayAccess {
 		if ($this->resource instanceof Model)
 		{
 			$this->attributes = $this->resource->getAttributes();
+		}
+
+		if ($this->resource instanceof MetadataInterface)
+		{
+			$metadata = $this->resource->metadata()->get();
+
+			foreach ($metadata as $meta)
+			{
+				$this->attributes[$meta->{$this->resource->getMetadataKeyColumn()}] = $meta->{$this->resource->getMetadataValueColumn()};
+			}
 		}
 	}
 
@@ -126,4 +137,5 @@ abstract class BasePresenter implements ArrayAccess {
 	public function __call( $method, $parameters ) {
 		return call_user_func_array([$this->resource, $method], $parameters);
 	}
+
 }

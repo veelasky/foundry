@@ -87,4 +87,5 @@ trait PresentableTrait {
 
 		return parent::__call($method, $parameters);
 	}
+
 } 

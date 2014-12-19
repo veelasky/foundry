@@ -31,7 +31,7 @@ trait MetadataTrait {
 		if (! $this instanceof MetadataInterface)
 			throw new Exceptions\InvalidInstanceException($this);
 
-		$eloquent = $this->getMetadataModel();
+		$eloquent = $this->getNewMetadataInstance();
 
 		return new HasMany(
 			$eloquent->newQuery(),
@@ -100,15 +100,16 @@ trait MetadataTrait {
 	/**
 	 * Get metadata model instance
 	 *
+	 * @param array $attributes
 	 * @return \Veelasky\Foundry\Database\Metadata\MetadataModel
 	 * @throws Exceptions\InvalidDataException
 	 */
-	public function getMetadataModel()
+	public function getNewMetadataInstance($attributes = [])
 	{
 		if ( empty ($this->__metadataAttributes) )
 			$this->validateMetadataAttribute();
 
-		$metadataModel = new MetadataModel();
+		$metadataModel = new MetadataModel($attributes);
 		$metadataModel->setTable($this->__metadataAttributes['tableName']);
 		$metadataModel->setConnection( $this->getConnectionName() );
 

@@ -37,6 +37,15 @@ interface MetadataInterface {
 	public function getMetadataForeignKey();
 
 	/**
+	 * Get metadata model instance
+	 *
+	 * @param array $attributes
+	 * @return \Veelasky\Foundry\Database\Metadata\MetadataModel
+	 * @throws Exceptions\InvalidDataException
+	 */
+	public function getNewMetadataInstance($attributes = []);
+
+	/**
 	 * Get metadata value column name
 	 *
 	 * @return string

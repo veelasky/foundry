@@ -17,4 +17,11 @@ class MetadataModel extends Model {
 	 */
 	public $timestamps = false;
 
+	/**
+	 * Indicates if all mass assignment is enabled.
+	 *
+	 * @var bool
+	 */
+	protected static $unguarded = true;
+
 }

@@ -7,6 +7,7 @@
  */
 
 use ArrayAccess;
+use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
 use Veelasky\Foundry\Database\Metadata\MetadataInterface;
 use Veelasky\Foundry\Presenter\Factory\PresentableInterface;
@@ -26,6 +27,13 @@ abstract class BasePresenter implements ArrayAccess {
 	 * @var array
 	 */
 	protected $attributes = [];
+
+	/**
+	 * Array attributes that need to be mutated for json output
+	 *
+	 * @var array
+	 */
+	protected $mutators = [];
 
 	/**
 	 * create new presenter instance
@@ -136,6 +144,33 @@ abstract class BasePresenter implements ArrayAccess {
 	 */
 	public function __call( $method, $parameters ) {
 		return call_user_func_array([$this->resource, $method], $parameters);
+	}
+
+	/**
+	 * Serialize attribute to JSON format
+	 *
+	 * @param int $options
+	 * @return string
+	 */
+	public function toJson($options=0)
+	{
+		$prepare = $this->attributes;
+
+		if ($this->resource instanceof Model)
+		{
+			Arr::forget($prepare, $this->resource->getHidden());
+		}
+
+		// prepare for attribute mutations
+		foreach ($this->mutators as $key => $method)
+		{
+			if (method_exists($this, $method))
+			{
+				$prepare[$key] = $this->$method();
+			}
+		}
+
+		return json_encode($prepare, $options);
 	}
 
 }

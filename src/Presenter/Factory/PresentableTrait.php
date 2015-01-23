@@ -73,17 +73,6 @@ trait PresentableTrait {
 	}
 
 	/**
-	 * Convert the model instance to JSON.
-	 *
-	 * @param int $options
-	 * @return string
-	 */
-	public function toJson($options=0)
-	{
-		return $this->__presenterInstance->toJson($options);
-	}
-
-	/**
 	 * Handle dynamic method calls into the method.
 	 *
 	 * @param  string  $method

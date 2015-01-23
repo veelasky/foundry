@@ -6,6 +6,7 @@
  * @package     veelasky/foundry
  */
 
+use ReflectionClass;
 use Illuminate\Support\Str;
 use Veelasky\Foundry\Presenter\BasePresenter;
 

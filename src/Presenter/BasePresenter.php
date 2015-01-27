@@ -157,7 +157,7 @@ abstract class BasePresenter implements ArrayAccess {
 
 		if ($this->resource instanceof Model)
 		{
-			$prepare = array_merge($this->resource->toArray(), $this->attributes);
+			Arr::forget($prepare, $this->resource->getHidden());
 		}
 
 		// prepare for attribute mutations

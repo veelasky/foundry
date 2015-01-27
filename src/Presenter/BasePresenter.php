@@ -147,18 +147,17 @@ abstract class BasePresenter implements ArrayAccess {
 	}
 
 	/**
-	 * Serialize attribute to JSON format
+	 * Convert the model instance to an array.
 	 *
-	 * @param int $options
-	 * @return string
+	 * @return array
 	 */
-	public function toJson($options=0)
+	public function toArray()
 	{
 		$prepare = $this->attributes;
 
 		if ($this->resource instanceof Model)
 		{
-			Arr::forget($prepare, $this->resource->getHidden());
+			$prepare = array_merge($this->resource->toArray(), $this->attributes);
 		}
 
 		// prepare for attribute mutations
@@ -170,7 +169,18 @@ abstract class BasePresenter implements ArrayAccess {
 			}
 		}
 
-		return json_encode($prepare, $options);
+		return $prepare;
+	}
+
+	/**
+	 * Serialize attribute to JSON format
+	 *
+	 * @param int $options
+	 * @return string
+	 */
+	public function toJson($options=0)
+	{
+		return json_encode($this->toArray(), $options);
 	}
 
 }

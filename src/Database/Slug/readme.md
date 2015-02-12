@@ -5,7 +5,7 @@ Easily integrated slug into eloquent model.
 ----
 #### Usage
 
-Just implement `HasSlugInterface` and use `HasSlug` trait into your eloquent model.
+Just implement `HasSlugInterface` and use `HasSlug` trait into your eloquent model, all you need to do is implementing `getSlugFrom()` to get the slug value from given attribute.
 
 ```php 
 use Illuminate\Database\Eloquent\Model;
@@ -22,4 +22,15 @@ class Post extends Model implements HasSlugInterface {
     }
     
 }
+```
+
+at default slug will use attribute `slug` on the designated table to store slug value, but if you want to change it you can easily change it by invoking `getSlug()` method.
+
+```php
+...
+    public function getSlug()
+    {
+        return 'custom_slug_attribute';
+    }
+...
 ```

@@ -30,14 +30,6 @@ class AuthServiceProvider extends ServiceProvider {
 
 			return $shield;
 		});
-
-		// register auth: extended to the application container
-		$this->app['foundry.auth']  = $this->app->share(function($app) {
-			$app['auth']->setDefaultDriver('foundry');
-
-			return $app['auth'];
-		});
-
 	}
 
 }

@@ -8,8 +8,10 @@
 
 use Illuminate\Auth\Guard;
 use Veelasky\Foundry\Auth\Contracts\HasOwner;
+use Veelasky\Foundry\Auth\Contracts\HasPermissions;
 use Veelasky\Foundry\Auth\Contracts\HasRoles;
 use Veelasky\Foundry\Auth\Contracts\RoleInterface;
+use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
 class Shield extends Guard {
 
@@ -201,23 +203,30 @@ class Shield extends Guard {
 	}
 
 	/**
-	 * Fire the login event if the dispatcher is set.
+	 * Set the current user of the application.
 	 *
 	 * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
-	 * @param  bool  $remember
 	 * @return void
 	 */
-	protected function fireLoginEvent($user, $remember = false)
+	public function setUser(UserContract $user)
 	{
-		if ( $this->user instanceof HasRoles )
+		if ( $user instanceof HasPermissions )
 		{
-			foreach ($this->user->getRoles() as $role)
+			foreach ($user->getPermissions() as $permission)
+			{
+				$this->setPermission($permission);
+			}
+		}
+
+		if ( $user instanceof HasRoles )
+		{
+			foreach ($user->getRoles() as $role)
 			{
 				$this->attachRole($role);
 			}
 		}
 
-		parent::fireLoginEvent($user, $remember = false);
+		parent::setUser($user);
 	}
 
 }

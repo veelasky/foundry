@@ -12,4 +12,4 @@ Useful tools and application's design pattern on laravel framework
 
 ### To Do
 
-- [] Test Suite
+- [ ] Test Suite

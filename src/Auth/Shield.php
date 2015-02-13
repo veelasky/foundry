@@ -8,6 +8,7 @@
 
 use Illuminate\Auth\Guard;
 use Veelasky\Foundry\Auth\Contracts\HasOwner;
+use Veelasky\Foundry\Auth\Contracts\HasRoles;
 use Veelasky\Foundry\Auth\Contracts\RoleInterface;
 
 class Shield extends Guard {
@@ -197,6 +198,26 @@ class Shield extends Guard {
 	public function isOwner(HasOwner $resource)
 	{
 		return ($this->user->getAuthIdentifier() == $resource->getOwnerAttribute());
+	}
+
+	/**
+	 * Fire the login event if the dispatcher is set.
+	 *
+	 * @param  \Illuminate\Contracts\Auth\Authenticatable  $user
+	 * @param  bool  $remember
+	 * @return void
+	 */
+	protected function fireLoginEvent($user, $remember = false)
+	{
+		if ( $this->user instanceof HasRoles )
+		{
+			foreach ($this->user->getRoles() as $role)
+			{
+				$this->attachRole($role);
+			}
+		}
+
+		parent::fireLoginEvent($user, $remember = false);
 	}
 
 }

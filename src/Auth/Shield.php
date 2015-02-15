@@ -30,6 +30,13 @@ class Shield extends Guard {
 	protected $resolvedRoles = [];
 
 	/**
+	 * Roles and permissions resolved indicator
+	 *
+	 * @var bool
+	 */
+	protected $resolved = false;
+
+	/**
 	 * List of all combined permissions for this user
 	 *
 	 * @var array
@@ -225,7 +232,7 @@ class Shield extends Guard {
 	{
 		parent::user();
 
-		if ($this->user instanceof UserContract)
+		if ($this->user instanceof UserContract AND ! $this->resolved)
 		{
 			$this->setRolesAndPermissions($this->user);
 		}
@@ -253,6 +260,8 @@ class Shield extends Guard {
 				$this->attachRole($role);
 			}
 		}
+
+		$this->resolved = true;
 	}
 
 	/**
@@ -265,6 +274,7 @@ class Shield extends Guard {
 		$this->roles = [];
 		$this->resolvedRoles = [];
 		$this->permissions = [];
+		$this->resolved = false;
 	}
 
 }

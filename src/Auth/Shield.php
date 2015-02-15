@@ -210,6 +210,34 @@ class Shield extends Guard {
 	 */
 	public function setUser(UserContract $user)
 	{
+		parent::setUser($user);
+
+		$this->resetRolesAndPermissions();
+		$this->setRolesAndPermissions($user);
+	}
+
+	/**
+	 * Get the currently authenticated user.
+	 *
+	 * @return \Illuminate\Contracts\Auth\Authenticatable|null
+	 */
+	public function user()
+	{
+		parent::user();
+
+		if ($this->user instanceof UserContract)
+		{
+			$this->setRolesAndPermissions($this->user);
+		}
+	}
+
+	/**
+	 * Set roles and permissions
+	 *
+	 * @param UserContract $user
+	 */
+	public function setRolesAndPermissions(UserContract $user)
+	{
 		if ( $user instanceof HasPermissions )
 		{
 			foreach ($user->getPermissions() as $permission)
@@ -225,8 +253,18 @@ class Shield extends Guard {
 				$this->attachRole($role);
 			}
 		}
+	}
 
-		parent::setUser($user);
+	/**
+	 * Reset roles and permissions data
+	 *
+	 * @return void
+	 */
+	public function resetRolesAndPermissions()
+	{
+		$this->roles = [];
+		$this->resolvedRoles = [];
+		$this->permissions = [];
 	}
 
 }

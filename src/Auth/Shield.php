@@ -242,12 +242,14 @@ class Shield extends Guard {
 	 */
 	public function user()
 	{
-		parent::user();
+		$user = parent::user();
 
-		if ($this->user instanceof UserContract AND ! $this->resolved)
+		if ($user instanceof UserContract AND ! $this->resolved)
 		{
-			$this->setRolesAndPermissions($this->user);
+			$this->setRolesAndPermissions($user);
 		}
+
+		return $user;
 	}
 
 	/**

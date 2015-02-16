@@ -174,6 +174,8 @@ class Shield extends Guard {
 	 */
 	public function can($permission)
 	{
+		if ($this->isSuperUser()) return true;
+
 		return array_key_exists($permission, $this->permissions);
 	}
 
@@ -185,7 +187,17 @@ class Shield extends Guard {
 	 */
 	public function cannot($permission)
 	{
-		return ! array_key_exists($permission, $this->permissions);
+		return ! $this->can($permission);
+	}
+
+	/**
+	 * Determine if user is SuperUser
+	 *
+	 * @return bool
+	 */
+	public function isSuperUser()
+	{
+		return array_key_exists('root', $this->permissions);
 	}
 
 	/**

@@ -8,6 +8,16 @@
 
 use Illuminate\Database\Eloquent\Model;
 
-class EloquentRepository {
+abstract class EloquentRepository {
+
+	/**
+	 * Model used by this repository
+	 *
+	 * @param \Illuminate\Database\Eloquent\Model $model
+	 */
+	public function __construct(Model $model)
+	{
+		$this->model = $model;
+	}
 
 }

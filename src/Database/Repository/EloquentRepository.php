@@ -81,7 +81,8 @@ abstract class EloquentRepository {
 	{
 		$model = $this->getById($id);
 		if ( ! $model )
-			throw new EntityNotFoundException;
+			throw new EntityNotFoundException($id, $this->model->getTable());
+
 		return $model;
 	}
 
@@ -91,7 +92,7 @@ abstract class EloquentRepository {
 	 * @param array $attributes
 	 * @return Model|static
 	 */
-	public function getNewInstance($attributes = array())
+	public function getNewInstance($attributes = [])
 	{
 		return $this->model->newInstance($attributes);
 	}
@@ -119,7 +120,7 @@ abstract class EloquentRepository {
 	 * @param array $data
 	 * @return mixed
 	 */
-	public function update(Model $model, $data = array())
+	public function update(Model $model, $data = [])
 	{
 		return $model->update($data);
 	}

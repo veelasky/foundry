@@ -6,7 +6,9 @@
  * @package     veelasky/foundry
  */
 
-class Role implements Contracts\RoleInterface {
+use Veelasky\Foundry\Auth\Contracts\RoleInterface;
+
+class Role implements RoleInterface {
 
 	/**
 	 * Role Identifier

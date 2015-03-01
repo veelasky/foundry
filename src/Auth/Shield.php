@@ -289,4 +289,16 @@ class Shield extends Guard {
 		$this->resolved = false;
 	}
 
+	/**
+	 * Remove the user data from the session and cookies.
+	 *
+	 * @return void
+	 */
+	protected function clearUserDataFromStorage()
+	{
+		parent::clearUserDataFromStorage();
+		
+		$this->resetRolesAndPermissions();
+	}
+
 }

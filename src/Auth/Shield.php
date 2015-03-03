@@ -8,12 +8,13 @@
 
 use Illuminate\Auth\Guard;
 use Veelasky\Foundry\Auth\Contracts\HasOwner;
-use Veelasky\Foundry\Auth\Contracts\HasPermissions;
 use Veelasky\Foundry\Auth\Contracts\HasRoles;
 use Veelasky\Foundry\Auth\Contracts\RoleInterface;
+use Veelasky\Foundry\Auth\Contracts\HasPermissions;
+use Veelasky\Foundry\Auth\Contracts\Shield as ShieldContract;
 use Illuminate\Contracts\Auth\Authenticatable as UserContract;
 
-class Shield extends Guard {
+class Shield extends Guard implements ShieldContract {
 
 	/**
 	 * List of all assigned role for this user
@@ -66,7 +67,7 @@ class Shield extends Guard {
 	 *
 	 * @param \Veelasky\Foundry\Auth\Contracts\RoleInterface $role
 	 */
-	protected function resolveRole(RoleInterface $role)
+	public function resolveRole(RoleInterface $role)
 	{
 		if (! array_key_exists($role->getIdentifier(), $this->resolvedRoles))
 		{
@@ -255,7 +256,7 @@ class Shield extends Guard {
 	/**
 	 * Set roles and permissions
 	 *
-	 * @param UserContract $user
+	 * @param \Illuminate\Contracts\Auth\Authenticatable $user
 	 */
 	public function setRolesAndPermissions(UserContract $user)
 	{

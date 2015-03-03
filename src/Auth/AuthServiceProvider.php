@@ -17,19 +17,26 @@ class AuthServiceProvider extends ServiceProvider {
 	 * @return void
 	 */
 	public function register() {
-		$this->app['auth']->extend('foundry', function ($app)
-		{
+		$this->app['auth']->extend( 'foundry', function ( $app ) {
 			$shield = new Shield(
-							new EloquentUserProvider($app['hash'], $app['config']->get('auth.model')),
-							$app['session.store']
-						);
+				new EloquentUserProvider( $app['hash'], $app['config']->get( 'auth.model' ) ),
+				$app['session.store']
+			);
 
-			$shield->setCookieJar($app['cookie']);
-			$shield->setDispatcher($app['events']);
-			$shield->setRequest($app->refresh('request', $shield, 'setRequest'));
+			$shield->setCookieJar( $app['cookie'] );
+			$shield->setDispatcher( $app['events'] );
+			$shield->setRequest( $app->refresh( 'request', $shield, 'setRequest' ) );
 
 			return $shield;
-		});
+		} );
+
+		// share and register foundry's auth to the application container
+		// only if the default driver is set to foundry.
+		if ($this->app['config']['auth.driver'] == 'foundry')
+		{
+			$this->app->alias('auth.driver', 'Veelasky\Foundry\Auth\Shield');
+			$this->app->alias('auth.driver', 'Veelasky\Foundry\Auth\Contracts\Shield');
+		}
 	}
 
 }

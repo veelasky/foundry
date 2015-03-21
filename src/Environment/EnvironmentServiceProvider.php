@@ -44,9 +44,9 @@ class EnvironmentServiceProvider extends ServiceProvider {
 	/**
 	 * Register the service provider
 	 *
-	 * @param $providers
+	 * @param array $providers
 	 */
-	protected function registerProviders($providers)
+	protected function registerProviders(array $providers)
 	{
 		foreach ($providers as $provider)
 		{

@@ -1,9 +1,15 @@
 ### Foundry
 ---
 
-Collections of useful tools and application's design pattern on laravel framework
+Useful tools and application's design pattern on laravel framework
+
+----
 
 ### Features
----
 
-- To be announced
+- [x] **Database: Slug**, automate your slug creation process on eloquent database
+- [x] **Auth: Extended**, Laravel Auth, with simple RBAC implementation
+
+### To Do
+
+- [ ] Test Suite

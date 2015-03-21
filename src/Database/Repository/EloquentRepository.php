@@ -1,4 +1,4 @@
-<?php  namespace Veelasky\Foundry\Database\Repository; 
+<?php namespace Veelasky\Foundry\Database\Repository;
 /**
  * Eloquent Repository
  * 
@@ -7,6 +7,7 @@
  */
 
 use Illuminate\Database\Eloquent\Model;
+use Veelasky\Foundry\Database\Exceptions\EntityNotFoundException;
 
 abstract class EloquentRepository {
 
@@ -48,7 +49,7 @@ abstract class EloquentRepository {
 	}
 
 	/**
-	 * Get record by its id
+	 * Get record by its primary key
 	 *
 	 * @param $id
 	 * @return mixed
@@ -75,14 +76,13 @@ abstract class EloquentRepository {
 	 *
 	 * @param $id
 	 * @return mixed
-	 * @throws \Veelasky\Foundry\Database\Repository\Exceptions\EntityNotFoundException
+	 * @throws \Veelasky\Foundry\Database\Exceptions\EntityNotFoundException
 	 */
 	public function requireById($id)
 	{
 		$model = $this->getById($id);
-
 		if ( ! $model )
-			throw new Exceptions\EntityNotFoundException;
+			throw new EntityNotFoundException($id, $this->model->getTable());
 
 		return $model;
 	}
@@ -93,7 +93,7 @@ abstract class EloquentRepository {
 	 * @param array $attributes
 	 * @return Model|static
 	 */
-	public function getNewInstance($attributes = array())
+	public function getNewInstance($attributes = [])
 	{
 		return $this->model->newInstance($attributes);
 	}
@@ -121,7 +121,7 @@ abstract class EloquentRepository {
 	 * @param array $data
 	 * @return mixed
 	 */
-	public function update(Model $model, $data = array())
+	public function update(Model $model, $data = [])
 	{
 		return $model->update($data);
 	}

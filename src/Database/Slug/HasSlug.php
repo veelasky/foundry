@@ -52,7 +52,7 @@ trait HasSlug {
 	 */
 	public function setAttribute($key, $value)
 	{
-		if ($key == $this->getSlugFrom())
+		if ($key == $this->getSlugFrom() AND null !== $this->getSlugFrom())
 		{
 			$this->setSlugAttribute($value);
 		}

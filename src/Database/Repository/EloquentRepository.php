@@ -7,6 +7,7 @@
  */
 
 use Illuminate\Database\Eloquent\Model;
+use Veelasky\Foundry\Database\Exceptions\EntityNotFoundException;
 
 abstract class EloquentRepository {
 
@@ -75,7 +76,7 @@ abstract class EloquentRepository {
 	 *
 	 * @param $id
 	 * @return mixed
-	 * @throws \Veelasky\Foundry\Database\Repository\EntityNotFoundException
+	 * @throws \Veelasky\Foundry\Database\Exceptions\EntityNotFoundException
 	 */
 	public function requireById($id)
 	{

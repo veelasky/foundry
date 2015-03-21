@@ -1,4 +1,4 @@
-<?php namespace Veelasky\Foundry\Database\Repository;
+<?php namespace Veelasky\Foundry\Database\Exceptions;
 /**
  * Entity not found exception
  * 

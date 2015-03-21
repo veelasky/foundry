@@ -1,4 +1,4 @@
-<?php namespace Veelasky\Foundry\Database\Slug;
+<?php namespace Veelasky\Foundry\Database\Slug\Contracts;
 /**
  * Has slug interface
  * 
@@ -6,14 +6,14 @@
  * @package     veelasky/foundry
  */
 
-interface HasSlugInterface {
+interface Slug {
 
 	/**
-	 * Get slug attribute name
+	 * get slug field name
 	 *
 	 * @return string
 	 */
-	public function getSlug();
+	public function getSlugField();
 
 	/**
 	 * Get slug from this attribute

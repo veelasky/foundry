@@ -11,13 +11,23 @@ use Illuminate\Support\Str;
 trait HasSlug {
 
 	/**
-	 * get slug attribute name
+	 * get slug field name
 	 *
 	 * @return string
 	 */
-	public function getSlug()
+	public function getSlugField()
 	{
-		return 'slug';
+		return property_exists($this, 'slug') ? $this->slug : 'slug';
+	}
+
+	/**
+	 * Get slug from this attribute
+	 *
+	 * @return string | null
+	 */
+	public function getSlugFrom()
+	{
+		return property_exists($this, 'fieldToSlug') ? $this->fieldToSlug : null;
 	}
 
 	/**
@@ -28,9 +38,9 @@ trait HasSlug {
 	public function setSlugAttribute($slug)
 	{
 		$slug = Str::slug($slug);
-		$slugCount = count( $this->newQuery()->whereRaw($this->getSlug() . " REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
+		$slugCount = count( $this->newQuery()->whereRaw($this->getSlugField() . " REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
 
-		$this->{$this->getSlug()} = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+		$this->{$this->getSlugField()} = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
 	}
 
 	/**

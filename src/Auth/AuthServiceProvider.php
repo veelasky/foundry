@@ -36,6 +36,10 @@ class AuthServiceProvider extends ServiceProvider {
 		{
 			$this->app->alias('auth.driver', 'Veelasky\Foundry\Auth\Shield');
 			$this->app->alias('auth.driver', 'Veelasky\Foundry\Auth\Contracts\Shield');
+
+			// and a helper file to make your life easier :)
+
+			require __DIR__ . '/helper.php';
 		}
 	}
 

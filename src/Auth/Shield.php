@@ -149,7 +149,7 @@ class Shield extends Guard implements ShieldContract {
 	/**
 	 * Determine if a user has a specific roles
 	 *
-	 * @param $identifier
+	 * @param string $identifier
 	 * @return bool
 	 */
 	public function hasRole($identifier)
@@ -170,7 +170,7 @@ class Shield extends Guard implements ShieldContract {
 	/**
 	 * Determine if a user has access to a certain permission
 	 *
-	 * @param $permission
+	 * @param string $permission
 	 * @return bool
 	 */
 	public function can($permission)
@@ -183,7 +183,7 @@ class Shield extends Guard implements ShieldContract {
 	/**
 	 * Determine if a user don't have any access to a certain permission
 	 *
-	 * @param $permission
+	 * @param string $permission
 	 * @return bool
 	 */
 	public function cannot($permission)

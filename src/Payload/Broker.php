@@ -1,6 +1,6 @@
 <?php  namespace Veelasky\Foundry\Payload; 
 /**
- * 
+ * Payload broker
  * 
  * @author      veelasky <veelasky@gmail.com>
  * @package     veelasky/foundry

@@ -82,7 +82,7 @@ class Broker implements PayloadContract {
 	 */
 	public function getPayload($key)
 	{
-		if (array_key_exists($key, $this->payload))
+		if (array_key_exists($key, $this->decryptedValue))
 		{
 			$value = $this->payload[$key];
 

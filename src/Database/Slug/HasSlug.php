@@ -38,9 +38,9 @@ trait HasSlug {
 	public function setSlugAttribute($slug)
 	{
 		$slug = Str::slug($slug);
-		$slugCount = count( $this->newQuery()->whereRaw($this->getSlugField() . " REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
+		$slugCount = count( $this->newQuery()->whereRaw($this->getSlugColumn() . " REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
 
-		$this->{$this->getSlugField()} = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+		$this->{$this->getSlugColumn()} = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
 	}
 
 	/**
@@ -52,7 +52,7 @@ trait HasSlug {
 	 */
 	public function setAttribute($key, $value)
 	{
-		if ($key == $this->getSlugFrom() AND null !== $this->getSlugFrom())
+		if ($key == $this->getSlugFromColumn() AND null !== $this->getSlugFromColumn())
 		{
 			$this->setSlugAttribute($value);
 		}

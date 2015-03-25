@@ -15,9 +15,9 @@ trait HasSlug {
 	 *
 	 * @return string
 	 */
-	public function getSlugField()
+	public function getSlugColumn()
 	{
-		return property_exists($this, 'slug') ? $this->slug : 'slug';
+		return property_exists($this, 'slugColumn') ? $this->slugColumn : 'slug';
 	}
 
 	/**
@@ -25,9 +25,9 @@ trait HasSlug {
 	 *
 	 * @return string | null
 	 */
-	public function getSlugFrom()
+	public function getSlugFromColumn()
 	{
-		return property_exists($this, 'fieldToSlug') ? $this->fieldToSlug : null;
+		return property_exists($this, 'slugFromColumn') ? $this->slugFromColumn : null;
 	}
 
 	/**

@@ -13,14 +13,14 @@ interface Slug {
 	 *
 	 * @return string
 	 */
-	public function getSlugField();
+	public function getSlugColumn();
 
 	/**
 	 * Get slug from this attribute
 	 *
 	 * @return string
 	 */
-	public function getSlugFrom();
+	public function getSlugFromColumn();
 
 	/**
 	 * Set slug attribute mutator

@@ -23,10 +23,10 @@ interface Slug {
 	public function getSlugFromColumn();
 
 	/**
-	 * Set slug attribute mutator
+	 * Set slug column attribute
 	 *
 	 * @param string $slug
 	 */
-	public function setSlugAttribute($slug);
+	public function setSlugColumn($slug);
 
 }

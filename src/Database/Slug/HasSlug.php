@@ -15,7 +15,7 @@ trait HasSlug {
 	 *
 	 * @return string
 	 */
-	public function getSlugColumn()
+	protected function getSlugColumn()
 	{
 		return property_exists($this, 'slugColumn') ? $this->slugColumn : 'slug';
 	}
@@ -25,22 +25,38 @@ trait HasSlug {
 	 *
 	 * @return string | null
 	 */
-	public function getSlugFromColumn()
+	protected function getSlugFromColumn()
 	{
 		return property_exists($this, 'slugFromColumn') ? $this->slugFromColumn : null;
 	}
 
 	/**
-	 * Set slug attribute mutator
+	 * Set slug attribute
 	 *
-	 * @param string $slug
+	 * @param string $value
 	 */
-	public function setSlugAttribute($slug)
+	protected function setSlugColumn($value)
 	{
-		$slug = Str::slug($slug);
-		$slugCount = count( $this->newQuery()->whereRaw($this->getSlugColumn() . " REGEXP '^{$slug}(-[0-9]*)?$'")->get() );
+		$slug = Str::slug($value);
 
-		$this->{$this->getSlugColumn()} = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+		$slugCount = $this->getSlugCount($slug);
+
+		$this->{ $this->getSlugColumn() } = ($slugCount > 0) ? "{$slug}-{$slugCount}" : $slug;
+	}
+
+	/**
+	 * get slug count
+	 *
+	 * @param  string $slug
+	 *
+	 * @return int
+	 */
+	protected function getSlugCount($slug)
+	{
+		return $this
+			->newQuery()
+			->whereRaw( $this->getSlugColumn() . " REGEXP '^{$slug}(-[0-9]*)?$'" )
+			->count();
 	}
 
 	/**
@@ -52,9 +68,9 @@ trait HasSlug {
 	 */
 	public function setAttribute($key, $value)
 	{
-		if ($key == $this->getSlugFromColumn() AND null !== $this->getSlugFromColumn())
+		if ($key == $this->getSlugFromColumn() AND null !== $value )
 		{
-			$this->setSlugAttribute($value);
+			$this->setSlugColumn($value);
 		}
 
 		return parent::setAttribute($key, $value);

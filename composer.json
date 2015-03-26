@@ -1,6 +1,6 @@
 {
     "name": "veelasky/foundry",
-    "description": "Useful tools and application's design structure on laravel framework",
+    "description": "Extended Package for laravel framework",
     "license": "MIT",
     "authors": [
         {

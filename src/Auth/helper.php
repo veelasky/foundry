@@ -52,4 +52,24 @@ if ( ! function_exists('shield') )
 		return shield()->hasRole($identifier);
 	}
 
+	/**
+	 * Get all available permissions for this user
+	 *
+	 * @return array
+	 */
+	function permissions()
+	{
+		return shield()->permissions();
+	}
+
+	/**
+	 * Get list of roles for this user
+	 *
+	 * @return array
+	 */
+	function roles()
+	{
+		return shield()->roles();
+	}
+
 }

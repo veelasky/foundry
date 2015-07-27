@@ -1,18 +1,18 @@
-<?php namespace Veelasky\Foundry\Auth\Contracts;
+<?php
+
+namespace Veelasky\Foundry\Auth\Contracts;
+
 /**
- * Has ownership contract
- * 
+ * Has ownership contract.
+ *
  * @author      veelasky <veelasky@gmail.com>
- * @package     veelasky/foundry
  */
-
-interface HasOwner {
-
-	/**
-	 * Get attribute that indicate ownership for this resource
-	 *
-	 * @return mixed
-	 */
-	public function getOwnerAttribute();
-
+interface HasOwner
+{
+    /**
+     * Get attribute that indicate ownership for this resource.
+     *
+     * @return mixed
+     */
+    public function getOwnerAttribute();
 }

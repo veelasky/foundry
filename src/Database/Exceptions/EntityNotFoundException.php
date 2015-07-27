@@ -1,24 +1,26 @@
-<?php namespace Veelasky\Foundry\Database\Exceptions;
-/**
+<?php
+
+namespace Veelasky\Foundry\Database\Exceptions;
+
+/*
  * Entity not found exception
- * 
+ *
  * @author      veelasky <veelasky@gmail.com>
  * @package     veelasky/foundry
  */
 
 use Exception;
 
-class EntityNotFoundException extends Exception{
-
-	/**
-	 * Create new exception instance
-	 *
-	 * @param $id
-	 * @param $table
-	 */
-	public function __construct($id, $table)
-	{
-		parent::__construct("Entity with identifier [$id] not found on table [$table]");
-	}
-
+class EntityNotFoundException extends Exception
+{
+    /**
+     * Create new exception instance.
+     *
+     * @param $id
+     * @param $table
+     */
+    public function __construct($id, $table)
+    {
+        parent::__construct("Entity with identifier [$id] not found on table [$table]");
+    }
 }

@@ -1,18 +1,18 @@
-<?php namespace Veelasky\Foundry\Auth\Contracts;
+<?php
+
+namespace Veelasky\Foundry\Auth\Contracts;
+
 /**
- * Has roles contract
- * 
+ * Has roles contract.
+ *
  * @author      veelasky <veelasky@gmail.com>
- * @package     veelasky/foundry
  */
-
-interface HasRoles {
-
-	/**
-	 * Get roles lists
-	 *
-	 * @return mixed
-	 */
-	public function getRoles();
-
+interface HasRoles
+{
+    /**
+     * Get roles lists.
+     *
+     * @return mixed
+     */
+    public function getRoles();
 }
